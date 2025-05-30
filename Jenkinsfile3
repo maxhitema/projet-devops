@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker rm -f myapp || true'
-                    sh 'docker run -d --name myapp -p 8088:80 myapache-image:v1.0'
+                    sh 'docker run -d --name myapp --network bridge -p 8088:80 myapache-image:v1.0'
                     sh 'docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" myapp'
                 }
             }
