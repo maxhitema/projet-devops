@@ -18,7 +18,7 @@ pipeline {
                     sh 'docker rm -f $(docker ps -aq) || true'
                     sh 'docker rmi -f $(docker images -q) || true'
                     sh 'docker build -t myapache-image .'
-                    sh 'docker tag myapache-image myapache-image:v1.0'
+                    sh 'docker inspect -f \'{{ .NetworkSettings.IPAddress }}\' myapp'
                 }
             }
         }
