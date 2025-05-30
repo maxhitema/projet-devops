@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/maxhitema/projet-devops.git', credentialsId: 'user-maxhitema-http'
+                git branch: 'main', url: 'https://github.com/maxhitema/projet-devops.git', credentialsId: 'user-maxhitema-http'
             }
         }
         stage('Build Docker image') {
@@ -17,6 +17,7 @@ pipeline {
                 script {
                     sh 'docker rm -f $(docker ps -aq) || true'
                     sh 'docker rmi -f $(docker images -q) || true'
+                    sh 'docker build -t myapache-image .'
                     sh 'docker tag myapache-image myapache-image:v1.0'
                 }
             }
